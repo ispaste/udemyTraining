@@ -57,20 +57,22 @@ func main()  {
 	t := instructions()
 	fmt.Println(t)
 	
-	// t is passed to fanOut and the slice of channels that is returned is assigned to "channels"
-	
-	channels := fanOut(t)
-	
-	// Verify that channels are populated with integers
-	
-	for _, c := range channels {
-		fmt.Println(c)
-	}
+	channels := make([]chan int, 0, t)
 	
 	// channels is passed to the operating function and the return is stored in channel of ints called "factorials"
 	
 	factorials := operating(channels)
 	
+	// t is passed to fanOut and the slice of channels that is returned is assigned to "channels"
+	
+	channels = fanOut(t)
+	
+	// Verify that channels are populated with integers
+	
+	for _, c := range channels {
+		fmt.Println(c)
+	}	
+		
 	// Print the contents of "factorials"
 	
 	for n := range factorials {
